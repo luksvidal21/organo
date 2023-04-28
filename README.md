@@ -24,7 +24,7 @@ https://organo-lake-delta.vercel.app/
 
 ## Stack utilizada
 
-**Front-end:** React
+**Front-end:** React/Js
 
 
 
