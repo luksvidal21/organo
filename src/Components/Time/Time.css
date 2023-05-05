@@ -2,6 +2,7 @@
     text-align: center;
     padding: 32px;
     background-color: #d9f7e9;
+    position: relative;
 }
 
 .time h3{
@@ -17,4 +18,10 @@
     flex-wrap: wrap;
     margin-top: 32px;
 
+}
+
+.time .input-cor{
+    position: absolute;
+    top: 20px;
+    right: 50px;
 }

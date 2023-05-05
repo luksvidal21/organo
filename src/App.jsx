@@ -5,7 +5,7 @@ import { useState } from "react"
 
 
 function App() {
-  const times = [
+  const [times,setTimes] =useState([
     {
       nome: 'Programação',
       corPrimaria: '#57C278',
@@ -41,11 +41,23 @@ function App() {
       corPrimaria: '#FF8A29',
       corSecundaria: '#FFEEDF'
     }
-  ]
+  ])
 
   const [colaboradores, setColaboradores] = useState([])
   const aoAdicionarColaborador = (colaborador) => {
     setColaboradores([...colaboradores,colaborador])
+  }
+
+  const aoDeletar = () => {
+    console.log("Deletando")
+  }
+
+  const mudarCorDoTime = (nome, cor) => {
+    times.map(time => {
+      if(time.nome === nome){
+        time.corSecundaria = cor;
+      }
+    })
   }
 
   return (
@@ -57,11 +69,13 @@ function App() {
       />
       {times.map(time => (
         <Time
+          mudaCorTime={mudarCorDoTime}
           key={time.nome}
           nome={time.nome}
           corPrimaria={time.corPrimaria}
           corSecundaria ={time.corSecundaria}
           colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
+          aoDeletar={aoDeletar}
         />
       ))}
     </div>
