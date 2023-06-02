@@ -53,11 +53,12 @@ function App() {
   }
 
   const mudarCorDoTime = (nome, cor) => {
-    times.map(time => {
+    setTimes(times.map(time => {
       if(time.nome === nome){
         time.corSecundaria = cor;
       }
-    })
+      return time
+    }))
   }
 
   return (
