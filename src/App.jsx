@@ -2,79 +2,84 @@ import Banner from "./Components/Banner"
 import Formulario from "./Components/Formulario"
 import Time from "./Components/Time"
 import { useState } from "react"
-
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [times,setTimes] =useState([
     {
+      id:uuidv4(),
       nome: 'Programação',
-      corPrimaria: '#57C278',
-      corSecundaria: '#D9F7E9'
+      cor: '#D9F7E9'
     },
     {
+      id:uuidv4(),
       nome: 'Front-End',
-      corPrimaria: '#82CFFA',
-      corSecundaria: '#E8F8FF'
+      cor: '#E8F8FF'
     },
     {
+      id:uuidv4(),
       nome: 'Data Science',
-      corPrimaria: '#A6D157',
-      corSecundaria: '#F0F8E2'
+      cor: '#F0F8E2'
     },
     {
+      id:uuidv4(),
       nome: 'Devops',
-      corPrimaria: '#E06B69',
-      corSecundaria: '#FDE7E8'
+      cor: '#FDE7E8'
     },
     {
+      id:uuidv4(),
       nome: 'UX e Design',
-      corPrimaria: '#DB6EBF',
-      corSecundaria: '#FAE9F5'
+      cor: '#FAE9F5'
     },
     {
+      id:uuidv4(),
       nome: 'Mobile',
-      corPrimaria: '#FFBA05',
-      corSecundaria: '#FFF5D9'
+      cor: '#FFF5D9'
     },
     {
+      id:uuidv4(),
       nome: 'Inovação e Gestão',
-      corPrimaria: '#FF8A29',
-      corSecundaria: '#FFEEDF'
+      cor: '#FFEEDF'
     }
   ])
 
   const [colaboradores, setColaboradores] = useState([])
   const aoAdicionarColaborador = (colaborador) => {
-    setColaboradores([...colaboradores,colaborador])
+    setColaboradores([...colaboradores,{...colaborador, id:uuidv4()}])
   }
 
   const aoDeletar = () => {
     console.log("Deletando")
   }
 
-  const mudarCorDoTime = (nome, cor) => {
+  const mudarCorDoTime = (id, cor) => {
     setTimes(times.map(time => {
-      if(time.nome === nome){
-        time.corSecundaria = cor;
+      if(time.id === id){
+        time.cor = cor;
       }
       return time
     }))
   }
 
+  const cadastrarTime = (novoTime) => {
+    setTimes([...times, {...novoTime, id: uuidv4()}])
+  }
+
   return (
     <div className="App">
       <Banner/>
-      <Formulario 
+      <Formulario
+        cadastrarTime={cadastrarTime} 
         aoColaboradorAdicionado={colaborador => aoAdicionarColaborador(colaborador)}
         times={times.map(time => time.nome)}
       />
       {times.map(time => (
         <Time
           mudaCorTime={mudarCorDoTime}
-          key={time.nome}
+          key={time.id}
+          id={time.id}
           nome={time.nome}
-          corPrimaria={time.corPrimaria}
-          corSecundaria ={time.corSecundaria}
+          cor={time.cor}
           colaboradores={colaboradores.filter(colaborador => colaborador.time === time.nome)}
           aoDeletar={aoDeletar}
         />
