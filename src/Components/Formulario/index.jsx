@@ -4,7 +4,11 @@ import Campo from "../Campo"
 import ListaSuspensa from "../ListaSuspensa"
 import './Formulario.css'
 
-const Formulario = (props) => {
+const Formulario = ({
+    cadastrarTime,
+    aoColaboradorAdicionado,
+    times
+}) => {
 
     const [nome,setNome] = useState('');
     const [cargo, setCargo] = useState('');
@@ -15,7 +19,7 @@ const Formulario = (props) => {
 
     const aoSalvar = (e)=>{
         e.preventDefault();
-        props.aoColaboradorAdicionado({
+        aoColaboradorAdicionado({
             nome,
             cargo,
             imagem,
@@ -51,7 +55,7 @@ const Formulario = (props) => {
                     aoAlterar={valor => setImagem(valor)}
                 />
                 <ListaSuspensa 
-                    itens={props.times}
+                    itens={times}
                     label="Times"
                     valor={time}
                     aoAlterar= {valor => setTime(valor)}
@@ -62,7 +66,7 @@ const Formulario = (props) => {
             </form>
             <form onSubmit={(e)=> {
                 e.preventDefault()
-                props.cadastrarTime({nome:nomeTime,cor:corTime})
+                cadastrarTime({nome:nomeTime,cor:corTime})
             }}>
                 <h2>Preencha os dados para criar um novo time</h2>
                 <Campo 

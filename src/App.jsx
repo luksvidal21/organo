@@ -1,7 +1,7 @@
 import Banner from "./Components/Banner"
 import Formulario from "./Components/Formulario"
 import Time from "./Components/Time"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { v4 as uuidv4 } from 'uuid';
 
 function App() {
@@ -40,10 +40,32 @@ function App() {
       id:uuidv4(),
       nome: 'Inovação e Gestão',
       cor: '#FFEEDF'
+    },
+    {
+      id:uuidv4(),
+      nome: 'Back-End',
+      cor: '#D0163B'
     }
   ])
 
-  const [colaboradores, setColaboradores] = useState([])
+  const [colaboradores, setColaboradores] = useState([
+    {
+        "nome": "Lucas Vidal",
+        "cargo": "Analista de Sistemas Júnior",
+        "imagem": "https://github.com/luksvidal21.png",
+        "time": "Programação",
+        "id": uuidv4(),
+        "favorito": false
+    },
+    {
+        "nome": "Marcos Lisboa",
+        "cargo": "Back End Ruby on Rails",
+        "imagem": "https://github.com/lisboamab.png",
+        "time": "Back-End",
+        "id": uuidv4(),
+        "favorito": false
+    }
+])
   const aoAdicionarColaborador = (colaborador) => {
     setColaboradores([...colaboradores,{...colaborador, id:uuidv4(),favorito:false}])
   }
@@ -71,6 +93,8 @@ function App() {
   const cadastrarTime = (novoTime) => {
     setTimes([...times, {...novoTime, id: uuidv4()}])
   }
+
+  useEffect(()=>{console.log(colaboradores)},[colaboradores])
 
   return (
     <div className="App">
